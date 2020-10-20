@@ -1,36 +1,90 @@
 from tkinter import *
 
 root = Tk()
-root.geometry("620x300")
+root.geometry("650x400")
 root.title("Temperature Unit Convertor")
 
-labelframe_c = LabelFrame(root, text = "Celcuis to Fahrenheit" , padx=48, pady=48)
-labelframe_c.pack(fill="both")
-labelframe_c .place(x = 20, y = 10)
-entry_c = Entry(labelframe_c)
-entry_c.pack()
+labelfr_1 = Frame(root)
+labelfr_1.pack()
 
-labelframe_f = LabelFrame(root, text = "Fahrenheit to Celcuis" ,padx=48, pady=48)
-labelframe_f.pack(fill="both")
-labelframe_f .place(x = 300 , y = 10)
-entry_f = Entry(labelframe_f)
-entry_f.pack()
+labelfr_2 = Frame(root)
+labelfr_2.pack()
 
-button_c =Button(root, text = "Activate-Celcuis to Fahrenheit")
-button_c .place(x = 20, y = 180)
+num_1 = IntVar
+num_2 = IntVar
 
-button_f = Button(root, text = "Activate-Fahrenheit to Celcuis")
-button_f .place(x = 300, y =180)
+labelfr_1 = LabelFrame(root, text = "Degrees Celcuis" , padx=48, pady=48)
+labelfr_1.pack(fill="both")
+labelfr_1 .place(x = 20, y = 10)
+entryfr_1 = Entry(labelfr_1, state="disable")
+entryfr_1.pack()
 
-btn_Calculate =Button(root, text ="Calculate Conversion")
-btn_Calculate .pack()
-btn_Calculate .place(x = 20 , y = 250)
+labelfr_2 = LabelFrame(root, text = "Degrees faranheit" ,padx=48, pady=48)
+labelfr_2.pack(fill="both")
+labelfr_2 .place(x = 350 , y = 10)
+entryfr_2 = Entry(labelfr_2, state="disable")
+entryfr_2.pack()
 
-btn_result= Entry(root, bg ="green2" ,)
-btn_result .pack()
-btn_result .place(x = 200 , y = 250 )
+def active_1():
+    entryfr_1.configure(state="normal")
+
+entryfr_1_btn=Button(root, text="Activate-Faranheit to Celcuis", command=active_1)
+entryfr_1_btn.pack()
+entryfr_1_btn.place(x = 20, y = 150)
+
+
+def active_1():
+    if entryfr_1:
+        num1= float(entryfr_1.get())
+        num2= (num1*9/5)+32
+        answer.insert(0, float(num2))
+
+cal1_btn=Button(root, text="Calculate F-C", command=active_1)
+cal1_btn.pack(side=LEFT)
+cal1_btn.place(x = 50, y = 270)
+
+
+def active2():
+    if entryfr_2:
+        num2= float(entryfr_2.get())
+        num1= (num2-32)*5/9
+        answer.insert(0, float(num1))
+
+def active_1():
+    entryfr_2.configure(state="normal")
+
+entryfr_2_btn=Button(root, text="Activate-Celcuis to Faranheit", command=active_1)
+entryfr_2_btn.pack()
+entryfr_2_btn.place(x = 350, y = 150)
+
+cal_btn=Button(root, text="Calculate C-F", command=active2)
+cal_btn.pack(side=LEFT)
+cal_btn.place(x = 50, y = 300)
+
+answer=Entry(root, text="", background="lime")
+answer.pack()
+answer.place(x = 250, y = 270)
+
+def clear_all_num():
+    entryfr_1.delete(0,END)
+    entryfr_2.delete(0,END)
+    answer.delete(0,END)
+
+clear_btn=Button(text="clear", command=clear_all_num)
+clear_btn.pack()
+clear_btn.place(x = 480, y = 350)
+
+def escape_program():
+    root.destroy()
+exit_btn=Button(text="Exit" ,command=escape_program)
+exit_btn.pack()
+exit_btn.place(x = 550, y = 350)
 
 root.mainloop()
+
+
+
+
 
 
 
